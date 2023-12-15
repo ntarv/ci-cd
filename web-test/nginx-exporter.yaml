@@ -1,0 +1,40 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: web-test
+  template:
+    metadata:
+      labels:
+        app: web-test
+    spec:
+      containers:
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:0.11.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - "nginx-prometheus-exporter"
+            - "-nginx.scrape-uri=http://10.233.15.213:8080/stub_status"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-exporter
+  namespace: monitoring
+  labels:
+    app: web-test
+spec:
+  type: ClusterIP
+  selector:
+    app: web-test
+  ports:
+  - name: nginx-api
+    port: 9113
+    protocol: TCP
+

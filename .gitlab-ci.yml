@@ -1,0 +1,47 @@
+stages:
+ - build
+ - dev
+ - deploy
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: tardocker/web-test:latest
+
+build:
+  stage: build
+  image: docker:stable 
+  when: manual
+  
+  script:
+    - apk update
+    - apk add  git
+    - git clone https://github.com/ntarv/ci-cd.git
+    - docker build . -f Dockerfile -t $CONTAINER_TEST_IMAGE
+  tags:
+    - web-test
+    
+dev:
+  stage: dev 
+  when: manual
+  script:
+  - docker login -u $USER -p $PASS
+  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+  - docker push $CONTAINER_RELEASE_IMAGE
+  - docker pull tardocker/web-test:latest
+  only:
+    - main
+  tags:
+    - web-test
+
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  when: manual
+  script:
+   - kubectl create namespace web
+   - kubectl create deployment web-test -n web --image tardocker/web-test:latest
+   - kubectl scale deployment web-test -n web --replicas 3
+   - kubectl expose deployment web-test -n web --type=LoadBalancer --port 8001  --external-ip=92.53.116.187
+  tags:
+    - web-test-shell

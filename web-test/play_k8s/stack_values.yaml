@@ -4240,8 +4240,8 @@ additionalScrapeConfigs:
       - action: labelmap
         regex: __meta_kubernetes_pod_label_(.+)
       - source_labels: [__meta_kubernetes_namespace]
-        action: replace
-        target_label: monitoring
-      - source_labels: [__meta_kubernetes_pod_name]
-        action: replace
-        target_label: web-test
+      	action: replace
+       	target_label: kubernetes_namespace
+     	- source_labels: [__meta_kubernetes_pod_name]
+      	action: replace
+       	target_label: kubernetes_pod_name

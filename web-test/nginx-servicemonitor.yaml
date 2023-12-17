@@ -4,8 +4,8 @@ kind: ServiceMonitor
 metadata:
   labels:
     app: web-test
-  name: web-nginx-exporter
-  namespace: monitoring
+  name: nginx-service-monitor
+  namespace: web1
 spec:
   endpoints:
   - interval: 10s

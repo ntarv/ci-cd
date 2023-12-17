@@ -28,8 +28,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 # Add your nginx server details here
-#nginxServer: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:8080/stub_status"
-nginxServer: "http://10.233.4.197:8000"
+nginxServer: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:8080/stub_status"
+nginxServer: "http://10.233.4.197:8080/stub_status"
 
 # Arguments - https://github.com/nginxinc/nginx-prometheus-exporter#command-line-arguments
 options: {}

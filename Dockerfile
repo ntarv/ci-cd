@@ -1,7 +1,7 @@
 FROM nginx:1.22.1
 
 RUN  useradd --uid 1001 nginxuser
-COPY default.conf status.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/conf.d/
 
 COPY /app ./app
 RUN touch /var/run/nginx.pid && \

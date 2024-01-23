@@ -39,9 +39,9 @@ deploy:
     entrypoint: [""]
   when: manual
   script:
-   - kubectl create namespace web
-   - kubectl create deployment web-test -n web --image tardocker/web-test:latest
-   - kubectl scale deployment web-test -n web --replicas 3
-   - kubectl expose deployment web-test -n web --type=LoadBalancer --port 8001  --external-ip=92.53.116.187
+   - kubectl create namespace web3
+   - kubectl create deployment web-test -n web3 --image tardocker/web-test:latest
+   - kubectl scale deployment web-test -n web3 --replicas 3
+   - kubectl expose deployment web-test -n web3 --type=LoadBalancer --port 8001  --external-ip=92.53.116.187
   tags:
     - web-test-shell

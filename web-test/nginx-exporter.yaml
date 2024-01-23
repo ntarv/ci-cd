@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - "nginx-prometheus-exporter"
-            - "-nginx.scrape-uri=http://10.233.15.213:8080/stub_status"
+            - "-nginx.scrape-uri=http://10.233.15.213:8080/metrics"
 
 ---
 apiVersion: v1

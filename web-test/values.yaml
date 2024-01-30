@@ -2,7 +2,7 @@
 
   replicas: 3 
 
-  image: tardocker/web-test:latest
+  image: tardocker/web-test:v4
   # repository: tardocker/web-test
   #tag: v2
   resourceslimits:

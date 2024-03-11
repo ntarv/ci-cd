@@ -9,7 +9,8 @@ RUN touch /var/run/nginx.pid && \
     chown -R nginxuser:nginxuser /app && \
     chown -R nginxuser:nginxuser /etc/nginx/conf.d && \
     chown -R nginxuser:nginxuser /var/cache/nginx && \
-    chown -R nginxuser:nginxuser /var/log/nginx 
+    chown -R nginxuser:nginxuser /var/log/nginx \ 
+             && rm -rf /var/lib/apt/lists/*    
 
 
 USER nginxuser
